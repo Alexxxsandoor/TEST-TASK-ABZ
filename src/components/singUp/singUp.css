@@ -23,6 +23,8 @@ form {
 	border: 1px solid rgba(0, 0, 0, 0.87);
 	border-radius: 4px 0px 0px 4px;
 	padding: 20px;
+
+	background: #D0CFCF;
 }
 
 .input-form {
