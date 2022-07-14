@@ -21,7 +21,8 @@ function SingUp() {
 		border: "1px solid  #D0CFCF",
 		padding: "14px",
 		borderRadius: "4px",
-		marginTop: "50px"
+		marginTop: "50px",
+		maxWidth: "90%"
 	}
 
 	//Получение картинки
