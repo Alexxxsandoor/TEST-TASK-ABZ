@@ -1,0 +1,11 @@
+.header {
+	position: fixed;
+	padding: 0 2rem;
+	background: white;
+	z-index: 5;
+}
+
+.header img {
+	min-width: 160px;
+	margin-top: 8%;
+}

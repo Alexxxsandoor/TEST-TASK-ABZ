@@ -1,0 +1,91 @@
+.users {
+	position: relative;
+	text-align: center;
+	min-height: 900px;
+	margin-top: 140px;
+
+}
+
+.users h1 {
+	margin-bottom: 30px;
+}
+
+.user-img {
+	margin: 0 auto;
+	width: 70px;
+	height: 70px;
+	padding: 20px 0;
+}
+
+.user-img img {
+	border-radius: 50px;
+}
+
+.list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	gap: 2rem;
+	padding: 0 40px;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+
+	min-width: 370px;
+	max-width: 370px;
+	min-height: 300px;
+
+	border-radius: 10px;
+	box-shadow: none;
+
+}
+
+.botton-btn {
+	position: absolute;
+	bottom: 2.5rem;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.tooltip {
+	cursor: pointer;
+}
+
+.tool {
+	background: red;
+}
+
+@media (max-width: 1700px) {
+	.botton-btn {
+		bottom: -3.5rem;
+	}
+}
+
+@media (max-width: 800px) {
+	.list {
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		gap: 1rem;
+		padding: 0px;
+	}
+
+	.card {
+		min-width: 300px;
+		max-width: 300px;
+	}
+
+}
+
+@media (max-width: 400px) {
+	.card {
+		min-width: 270px;
+		max-width: 270px;
+	}
+}
+
+@media (max-width: 374px) {
+	.botton-btn {
+		padding: 2px 20px;
+	}
+}

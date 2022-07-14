@@ -1,0 +1,56 @@
+.singUp {
+	margin-top: 70px;
+	text-align: center;
+}
+
+form {
+	margin: 0 auto;
+	min-width: 378px;
+}
+
+.div-upload {
+	background: red;
+	padding: 20px;
+}
+
+.upload {
+	border-radius: 4px;
+	margin: 50px 0;
+	height: 100%;
+	border: 1px solid #D0CFCF;
+	display: flex;
+	align-items: center;
+}
+
+.upload-btn-submit {
+	flex-grow: 0;
+	margin-right: 20px;
+	border: 1px solid rgba(0, 0, 0, 0.87);
+	border-radius: 4px 0px 0px 4px;
+	padding: 20px;
+}
+
+.input-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.input-spec {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	flex-grow: 1;
+}
+
+@media (max-width: 500px) {
+	form {
+		min-width: 320px;
+	}
+}
+
+@media (max-width: 330px) {
+	form {
+		min-width: 290px;
+	}
+}
