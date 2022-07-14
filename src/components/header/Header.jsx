@@ -9,25 +9,27 @@ function Header() {
 	return (
 		<nav className='header'>
 			<div className="nav-wrapper">
-				<div className="brand-logo" onClick={scrollToTop}><img src={logo} alt="logo" /></div>
-				<ul id="nav-mobile" className="right hide-on-med-and-down">
+				<div className="brand-logo left" onClick={scrollToTop}><img src={logo} alt="logo" /></div>
+				<ul id="nav-mobile" className="right">
 					<Link
+
 						activeClass="active"
 						to="users"
 						spy={true}
 						smooth={true}
 						offset={-70}
 						duration={500}
-						className="waves-effect btn"
+						className="waves-effect btn btn-navbar"
 					>Users</Link>
 					<Link
-						activeClass="active"
+
+						activeClass="active "
 						to="singUp"
 						spy={true}
 						smooth={true}
 						offset={-70}
 						duration={500}
-						className="waves-effect btn"
+						className="btn-navbar waves-effect btn "
 					>Sign up</Link>
 				</ul>
 			</div>

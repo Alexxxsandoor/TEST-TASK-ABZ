@@ -1,17 +1,19 @@
 import './singUp.css'
 import { useState, useEffect } from 'react'
 import { InputRadio } from './InputRadio'
+import image from "./success-image.svg"
 
 function SingUp() {
 	const [singUpStatus, setStatus] = useState(false)
 	const [positionslist, setPositionslist] = useState([])
 	const [token, setToken] = useState('')
+	const [statusPost, setStatusPost] = useState(false)
 	const [Userinfo, setUserinfo] = useState({
-		name: '',
-		email: '',
-		phone: '',
-		position: 0,
-		image: '',
+		name: "",
+		email: "",
+		phone: "",
+		position: 1,
+		image: "",
 	})
 
 	//стиль для инпутов
@@ -31,7 +33,7 @@ function SingUp() {
 	}
 
 	//отправка информации о юзере
-	function handleSubmit() {
+	function handleSubmit(props) {
 		//получаю токен для юзера
 		fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
 			.then(function (response) {
@@ -45,9 +47,10 @@ function SingUp() {
 
 		//отправляю инфу на сервер
 		var formData = new FormData();
+		// var fileField = document.querySelector('input[type="file"]');
 		formData.append('position_id', Userinfo.position);
 		formData.append('name', Userinfo.name);
-		formData.append('email', Userinfo.email);
+		formData.append('email', "Userinfo.email");
 		formData.append('phone', '+38' + Userinfo.phone);
 		formData.append('photo', Userinfo.image);
 		fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users',
@@ -55,13 +58,16 @@ function SingUp() {
 				method: 'POST',
 				body: formData,
 				headers: {
-					'Token': token, // get token with GET api/v1/token method 
+					'Token': token,
 				},
 			})
 			.then(function (response) { return response.json(); })
 			.then(function (data) {
 				if (data.success) {
-				} else { }
+					setStatusPost(true)
+				} else {
+
+				}
 			}).catch(function (error) {
 				console.err(error)
 			});
@@ -86,69 +92,72 @@ function SingUp() {
 		if (name && email && phone && position) setStatus(true)
 		else setStatus(false)
 	}, [Userinfo])
-
 	return (
 		<div className="singUp">
 			<h1>Working with POST request</h1>
-			<div className="row input-form">
-				<form className="col s6" onSubmit={handleSubmit}>
-					<div className="row">
-						<div className="input-field col s12">
-							<input
-								style={style}
-								id="name"
-								type="text"
-								placeholder='Your name'
-								className="speciality"
-								onChange={(event) => setUserinfo({
-									...Userinfo,
-									name: event.target.value
-								})}
-								required
-							/>
-							<input
-								style={style}
-								id="Email"
-								type="email"
-								placeholder='Email'
-								className="speciality"
-								onChange={(event) => setUserinfo({
-									...Userinfo,
-									email: event.target.value
-								})}
-								required
-							/>
-							<input
-								style={style}
-								id="tel"
-								type="tel"
-								placeholder='Phone'
-								className="speciality"
-								pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
-								onChange={(event) => setUserinfo({
-									...Userinfo,
-									phone: event.target.value
-								})}
-								required
-							/>
-							<span className="helper-text left" data-error="wrong" >+38 (XXX) XXX - XX - XX</span>
+			{statusPost ?
+				<img src={image} alt="post" />
+				:
+				<div className="row input-form">
+					<form className="col s6">
+						<div className="row">
+							<div className="input-field col s12">
+								<input
+									style={style}
+									id="name"
+									type="text"
+									placeholder='Your name'
+									className="speciality"
+									onChange={(event) => setUserinfo({
+										...Userinfo,
+										name: event.target.value
+									})}
+									required
+								/>
+								<input
+									style={style}
+									id="Email"
+									type="email"
+									placeholder='Email'
+									className="speciality"
+									onChange={(event) => setUserinfo({
+										...Userinfo,
+										email: event.target.value
+									})}
+									required
+								/>
+								<input
+									style={style}
+									id="tel"
+									type="tel"
+									placeholder='Phone'
+									className="speciality"
+									pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+									onChange={(event) => setUserinfo({
+										...Userinfo,
+										phone: event.target.value
+									})}
+									required
+								/>
+								<span className="helper-text left" data-error="wrong" >+38 (XXX) XXX - XX - XX</span>
+							</div>
 						</div>
-					</div>
-					<div className='input-spec'>
-						<p>Select your position</p>
-						{positionslist.map(el => <InputRadio key={el.id} Userinfo={Userinfo} setUserinfo={setUserinfo} {...el} />)}
-					</div>
-					<div className="upload file-field input-field">
-						<input type="file" onChange={handleChange} />
-						<button className='upload-btn-submit' type="submit">Upload</button>
-					</div>
-					{!singUpStatus ?
-						<button className='btn disabled'>Sign up</button>
-						:
-						<button className='btn'>Sign up</button>
-					}
-				</form>
-			</div>
+						<div className='input-spec'>
+							<p>Select your position</p>
+							{positionslist.map(el => <InputRadio key={el.id} Userinfo={Userinfo} setUserinfo={setUserinfo} {...el} />)}
+						</div>
+						<div className="upload file-field input-field">
+							<input type="file" onChange={handleChange} required />
+							<button className='upload-btn-submit' type="submit">Upload</button>
+						</div>
+						{!singUpStatus ?
+							<button className='btn disabled'>Sign up</button>
+							:
+							<button className='btn' onClick={() => handleSubmit(Userinfo)}>Sign up</button>
+						}
+					</form>
+				</div>
+			}
 		</div>
 	)
 }
